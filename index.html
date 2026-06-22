@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#241522" />
+  <title>Heartstring — A Visual Novel</title>
+  <meta name="description" content="An interactive visual novel." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="scene-background" class="scene-background"></div>
+    <div class="vignette"></div>
+
+    <!-- Shown while the current scene is being fetched from Firestore -->
+    <div id="loading-screen" class="overlay-screen">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Loading your story…</p>
+    </div>
+
+    <!-- Shown if a scene doc is missing or Firestore can't be reached -->
+    <div id="error-screen" class="overlay-screen hidden">
+      <div class="overlay-card">
+        <p id="error-message"></p>
+        <button id="retry-btn" class="btn btn-primary" type="button">Try again</button>
+      </div>
+    </div>
+
+    <!-- The actual VN stage: character art, dialogue box, choices -->
+    <main id="stage" class="stage hidden">
+      <div class="character-wrap">
+        <img id="character-image" class="character-image hidden" alt="" />
+      </div>
+
+      <section id="dialogue-box" class="dialogue-box">
+        <div class="page-fold" aria-hidden="true"></div>
+        <div id="name-plate" class="name-plate hidden"></div>
+        <p id="dialogue-text" class="dialogue-text"></p>
+      </section>
+
+      <div id="choices" class="choices"></div>
+
+      <div id="ending-panel" class="ending-panel hidden">
+        <h2 class="ending-title">The End</h2>
+        <button id="restart-btn" class="btn btn-primary" type="button">Read Again</button>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="./js/game.js"></script>
+</body>
+</html>

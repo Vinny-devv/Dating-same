@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#241522" />
+  <title>Scene Editor — Heartstring Admin</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/admin.css" />
+</head>
+<body>
+
+  <!-- Signed out -->
+  <div id="signin-screen" class="auth-screen">
+    <div class="auth-card">
+      <h1 class="brand">Scene Editor</h1>
+      <p>Sign in with the studio Google account to manage scenes.</p>
+      <button id="google-signin-btn" class="btn btn-primary" type="button">Sign in with Google</button>
+    </div>
+  </div>
+
+  <!-- Signed in, but not the admin account -->
+  <div id="denied-screen" class="auth-screen hidden">
+    <div class="auth-card">
+      <h1 class="brand">Access restricted</h1>
+      <p id="denied-message">This account doesn't have editor access.</p>
+      <button id="signout-btn-denied" class="btn btn-secondary" type="button">Sign out</button>
+    </div>
+  </div>
+
+  <!-- Signed in as the admin account -->
+  <div id="dashboard" class="dashboard hidden">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="brand">Scene Editor</h1>
+        <p class="admin-email" id="admin-email"></p>
+      </div>
+
+      <button id="new-scene-btn" class="btn btn-primary btn-block" type="button">+ New scene</button>
+
+      <div class="scene-list" id="scene-list"></div>
+
+      <button id="signout-btn" class="btn btn-ghost btn-block" type="button">Sign out</button>
+    </aside>
+
+    <main class="editor">
+      <header class="editor-header">
+        <h2 id="editor-title">New scene</h2>
+        <div class="editor-actions">
+          <button id="preview-btn" class="btn btn-secondary hidden" type="button">Preview ↗</button>
+          <button id="set-start-btn" class="btn btn-secondary hidden" type="button">Set as opening scene</button>
+          <button id="delete-btn" class="btn btn-danger hidden" type="button">Delete</button>
+        </div>
+      </header>
+
+      <form id="scene-form" class="scene-form">
+        <div class="field">
+          <label for="scene-id">Scene ID</label>
+          <input id="scene-id" type="text" placeholder="e.g. cafe_meeting" required pattern="[a-zA-Z0-9_-]+" />
+          <p class="hint">Letters, numbers, underscores and hyphens only. Can't be changed once saved.</p>
+        </div>
+
+        <div class="field">
+          <label for="character-name">Character name</label>
+          <input id="character-name" type="text" placeholder="e.g. Yuki" />
+        </div>
+
+        <div class="field">
+          <label for="dialogue-text">Dialogue</label>
+          <textarea id="dialogue-text" rows="4" placeholder="What does this character say?" required></textarea>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="image-url">Character image URL</label>
+            <input id="image-url" type="url" placeholder="https://i.ibb.co/..." />
+          </div>
+          <div class="field">
+            <label for="image-upload">Or upload to ImgBB</label>
+            <input id="image-upload" type="file" accept="image/*" />
+          </div>
+        </div>
+
+        <img id="image-preview" class="image-preview hidden" alt="Character preview" />
+
+        <div class="field">
+          <label for="background-url">Background image URL (optional)</label>
+          <input id="background-url" type="url" placeholder="https://i.ibb.co/..." />
+        </div>
+
+        <div class="field checkbox-field">
+          <label><input id="is-ending" type="checkbox" /> This is an ending scene</label>
+        </div>
+
+        <div class="field" id="choices-field">
+          <div class="field-label-row">
+            <label>Choices</label>
+            <button id="add-choice-btn" class="btn btn-secondary btn-small" type="button">+ Add choice</button>
+          </div>
+          <div id="choices-list" class="choices-list"></div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Save scene</button>
+          <span id="save-status" class="save-status"></span>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script type="module" src="./js/admin.js"></script>
+</body>
+</html>
