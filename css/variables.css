@@ -1,0 +1,131 @@
+/* variables.css
+   Design tokens for the whole project. The visual identity is "a romance
+   novel you're inside of": a deep plum stage, a cream storybook page for
+   dialogue, rose for warmth, gold for gilding. Admin shares the palette
+   but leans on the mono face for anything that's data, not story. */
+
+:root {
+  /* Color */
+  --ink: #2a1e24;
+  --paper: #fbf1e4;
+  --paper-soft: #f7f1e8;
+  --rose: #c81d5b;
+  --rose-deep: #9c1346;
+  --rose-soft: #f0a8c2;
+  --gold: #c9a24b;
+  --gold-soft: #e3cb8f;
+  --plum: #241522;
+  --plum-soft: #3a2438;
+  --plum-line: rgba(255, 255, 255, 0.12);
+  --success: #4f9d69;
+  --danger: #c4314f;
+
+  /* Type */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Nunito", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+
+  /* Shape & motion */
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 26px;
+  --shadow-soft: 0 12px 30px rgba(36, 21, 34, 0.25);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+
+.hidden {
+  display: none !important;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Buttons shared by game + admin */
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.65em 1.4em;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: transform 0.15s var(--ease), background 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-primary {
+  background: var(--rose);
+  color: var(--paper);
+  box-shadow: 0 6px 16px rgba(200, 29, 91, 0.35);
+}
+.btn-primary:hover {
+  background: var(--rose-deep);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--gold);
+}
+.btn-secondary:hover {
+  background: var(--gold-soft);
+}
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+  border: 1.5px solid var(--danger);
+}
+.btn-danger:hover {
+  background: var(--danger);
+  color: var(--paper);
+}
+.btn-ghost {
+  background: transparent;
+  color: inherit;
+  opacity: 0.75;
+}
+.btn-ghost:hover {
+  opacity: 1;
+}
+.btn-small {
+  padding: 0.4em 0.9em;
+  font-size: 0.82rem;
+}
+.btn-block {
+  width: 100%;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

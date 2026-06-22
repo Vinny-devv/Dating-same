@@ -1,0 +1,250 @@
+/* style.css — the public game stage */
+@import "./variables.css";
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(ellipse at top, #3a2438 0%, var(--plum) 70%);
+}
+
+#app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.scene-background {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.5s var(--ease);
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(36, 21, 34, 0.15) 0%,
+    rgba(36, 21, 34, 0.05) 35%,
+    rgba(36, 21, 34, 0.65) 78%,
+    rgba(36, 21, 34, 0.92) 100%
+  );
+  pointer-events: none;
+}
+
+/* ---------- Loading / error overlays ---------- */
+
+.overlay-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  color: var(--paper);
+  text-align: center;
+  padding: 2rem;
+}
+
+.spinner {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid rgba(251, 241, 228, 0.25);
+  border-top-color: var(--gold);
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.overlay-card {
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* ---------- Stage ---------- */
+
+.stage {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.character-wrap {
+  position: absolute;
+  bottom: 14%;
+  right: 4%;
+  width: min(46vw, 460px);
+  height: 72%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 2;
+  animation: rise 0.5s var(--ease);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.character-image {
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.45));
+}
+
+/* ---------- Dialogue box: a storybook page ---------- */
+
+.dialogue-box {
+  position: relative;
+  z-index: 3;
+  margin: 0 auto;
+  width: min(92%, 880px);
+  margin-bottom: 1.4rem;
+  background: var(--paper);
+  border-top: 5px solid var(--gold);
+  border-radius: var(--radius-md) var(--radius-md) 4px 4px;
+  box-shadow: var(--shadow-soft);
+  padding: 2rem 2.2rem 1.6rem;
+  min-height: 7.5rem;
+  cursor: pointer;
+}
+
+.name-plate {
+  position: absolute;
+  top: -1.6rem;
+  left: 1.6rem;
+  background: var(--rose);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  padding: 0.4rem 1.3rem;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  transform: rotate(-2deg);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.dialogue-text {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: var(--ink);
+  min-height: 3.3em;
+}
+
+/* folded page corner — the one signature flourish */
+.page-fold {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 28px 28px;
+  border-color: transparent transparent var(--gold-soft) transparent;
+  border-bottom-right-radius: 4px;
+  opacity: 0.85;
+}
+
+/* ---------- Choices ---------- */
+
+.choices {
+  position: relative;
+  z-index: 3;
+  width: min(92%, 880px);
+  margin: 0 auto 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+}
+
+.choice-btn {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1.5px solid var(--gold);
+  border-radius: 999px;
+  padding: 0.6rem 1.4rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.98rem;
+  box-shadow: 0 6px 16px rgba(36, 21, 34, 0.25);
+  transition: background 0.18s var(--ease), color 0.18s var(--ease), transform 0.15s var(--ease);
+}
+
+.choice-btn:hover {
+  background: var(--rose);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+
+/* ---------- Ending panel ---------- */
+
+.ending-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  background: rgba(36, 21, 34, 0.78);
+  backdrop-filter: blur(2px);
+}
+
+.ending-title {
+  font-family: var(--font-display);
+  color: var(--paper);
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 720px) {
+  .character-wrap {
+    width: 60vw;
+    right: 2%;
+    bottom: 16%;
+  }
+  .dialogue-box,
+  .choices {
+    width: 100%;
+  }
+  .dialogue-box {
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    padding: 1.6rem 1.2rem 1.3rem;
+  }
+  .choices {
+    align-items: stretch;
+  }
+  .name-plate {
+    left: 1rem;
+    font-size: 1rem;
+  }
+}
