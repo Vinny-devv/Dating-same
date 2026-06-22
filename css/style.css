@@ -120,6 +120,7 @@ body {
 .dialogue-box {
   position: relative;
   z-index: 3;
+  order: 2;
   margin: 0 auto;
   width: min(92%, 880px);
   margin-bottom: 1.4rem;
@@ -174,6 +175,7 @@ body {
 .choices {
   position: relative;
   z-index: 3;
+  order: 1;
   width: min(92%, 880px);
   margin: 0 auto 1rem;
   display: flex;
